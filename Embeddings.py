@@ -42,7 +42,9 @@ num_epochs = 100
 perplexity = 5
 n_iter = 1000
 
+# main_folder = 'LyricDataByArtist/'
 main_folder = 'LyricDataByArtist/'
+
 # Iterate over the subfolders (genres) in the main folder
 for genre_folder in os.listdir(main_folder):
     genre_path = os.path.join(main_folder, genre_folder)
