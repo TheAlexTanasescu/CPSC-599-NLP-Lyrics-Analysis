@@ -80,14 +80,14 @@ sim1 = []
 for genre, embedding in genre_embeddings.items():
     cos_sim = cosine(new_embedding, embedding)
     # cos_sim1 = cosine_similarity([new_embedding], [embedding])[0][0]
-    similarities.append((genre, 1 - cos_sim))
+    similarities.append((genre, cos_sim))
     # sim1.append((genre, cos_sim1))
 
 # print(similarities)
 
 #Sort by highest
-similarities.sort(key = lambda x: x[1], reverse=True)
-# sim1.sort(key = lambda x: x[1], reverse= True)
+similarities.sort(key = lambda x: x[1], reverse=False)
+# sim1.sort(key = lambda x: x[1], reverse= False)
 
 
 num_closest = 5
