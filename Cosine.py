@@ -4,6 +4,7 @@ import numpy as np
 from gensim.models.doc2vec import Doc2Vec
 from sklearn.metrics.pairwise import cosine_similarity
 import ssl
+from scipy.spatial.distance import cosine
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -26,8 +27,19 @@ def clean_lyrics(lyrics):
     return tokens
 
 # Load the lyrics
-with open('baby.rtf', 'r') as f:
-    lyrics = f.read()
+# with open('baby.rtf', 'r') as f:
+#     lyrics = f.read()
+
+
+
+ 
+S_L = ""
+while (1):
+    nl = str(input())
+    if nl == "`" : break
+    S_L = S_L + nl
+
+lyrics = S_L    
 
 # Clean the lyrics
 lyrics = clean_lyrics(lyrics)
@@ -43,30 +55,43 @@ print("length of lyrics: ")
 print( str(len(lyrics)))
 '''
 
-embeddings = model.infer_vector(lyrics)
-embeddings = np.array(embeddings).reshape(1,-1)
+new_embedding = model.infer_vector(lyrics)
 
 #print("embeddings")
 #print(embeddings)
 
 
 # Load other embeddings from a .npy file
-other_embeddings = np.load('genre_embeddings.npy',allow_pickle=True).item()
-other_embeddings_array = [value for value in other_embeddings.values()]
-#other_embeddings_array = np.array(other_embeddings_array).reshape(1,-1)
+genre_embeddings = np.load('genre_embeddings.npy',allow_pickle=True).item()
+
+#genre_embeddings_array = np.array(genre_embeddings_array).reshape(1,-1)
 
 
-#print("other_embedding")
-#print(other_embeddings_array)
+#print("genre_embedding")
+#print(genre_embeddings_array)
 
 # Find the closest embeddings using cosine similarity
-#similarities = cosine_similarity(embeddings, other_embeddings_array)
-#similarities = cosine_similarity(embeddings, other_embeddings_array[0])
-similarities = [cosine_similarity(embeddings, np.array(other_embeddings_array[i]).reshape(1,-1)) for i in range(len(other_embeddings_array))]
-print(similarities)
-closest_indexes = np.argmax(similarities, axis=1)
+similarities = []
+#similarities = cosine_similarity(embeddings, genre_embeddings_array)
+#similarities = cosine_similarity(embeddings, genre_embeddings_array[0])
+# similarities = [cosine_similarity(embeddings, np.array(genre_embeddings_array[i]).reshape(1,-1)) for i in range(len(genre_embeddings_array))]
+sim1 = []
+
+for genre, embedding in genre_embeddings.items():
+    cos_sim = cosine(new_embedding, embedding)
+    # cos_sim1 = cosine_similarity([new_embedding], [embedding])[0][0]
+    similarities.append((genre, 1 - cos_sim))
+    # sim1.append((genre, cos_sim1))
+
+# print(similarities)
+
+#Sort by highest
+similarities.sort(key = lambda x: x[1], reverse=True)
+# sim1.sort(key = lambda x: x[1], reverse= True)
+
+
+num_closest = 5
 
 # Print the closest embeddings
-for index in closest_indexes:
-    if index in other_embeddings:
-        print(other_embeddings[index])
+for i in range (num_closest):
+        print(similarities[i])
