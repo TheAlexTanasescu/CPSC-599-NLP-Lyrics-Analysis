@@ -14,3 +14,5 @@ In LyricDatabyArtist, you will find directories for each artist with music in th
 
 NOTE: You may have to modify these file paths in the code in accordance with your operating system's file sys. This was written using a windows os. 
 
+Preprocessing contains the results from lda+tf-idf
+Cosine deals with artist similarity 
