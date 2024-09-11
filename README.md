@@ -17,7 +17,7 @@ NOTE: You may have to modify these file paths in the code in accordance with you
 Preprocessing contains the results from lda+tf-idf
 Cosine deals with artist similarity 
 
-Presentation (explains certain concepts about the project and process)
+Presentation (explains certain concepts about the project and process)  
 http://bit.ly/4dXgzGz
 
 
