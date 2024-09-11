@@ -18,5 +18,6 @@ Preprocessing contains the results from lda+tf-idf
 Cosine deals with artist similarity 
 
 Presentation (explains certain concepts about the project and process)
-[[https://www.canva.com/design/DAFevnJz3mU/hCKUE90OvBYVXxo7ePlKMw/edit?utm_content=DAFevnJz3mU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton](http://bit.ly/4dXgzGz)](https://bit.ly/4dXgzGz)
+http://bit.ly/4dXgzGz
+
 
